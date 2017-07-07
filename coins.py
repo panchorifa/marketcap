@@ -2,15 +2,12 @@
 Command line tool to scrape and parse craigslist cities
 """
 import argparse
-from xlist.cache import Cache
-from xlist.services import XlistService
-from xlist.settings import CACHE_DIRECTORY
-
+from market.services import MarketService
 
 def create_main_parser():
     parser = argparse.ArgumentParser(
-        description='Scrape craigslist data in different cities',
-        prog='craigslist'
+        description='Scrape coinmarketcap.com',
+        prog='currency'
     )
 
     subparsers = parser.add_subparsers(
@@ -19,7 +16,6 @@ def create_main_parser():
         dest='command'
     )
     return parser, subparsers
-
 
 def create_find_parser(subparsers):
     parser_find = subparsers.add_parser(
@@ -70,17 +66,6 @@ def main():
             service.find(cats, keywords, cities)
         except KeyboardInterrupt:
             pass
-
-
-class RequestMock(object):
-    """
-    Only used for testing command line interface
-    """
-    def __init__(self, path):
-        self.path = path
-
-    def get(self, url):
-        return open(self.path, 'r').read()
 
 
 if __name__ == '__main__':
