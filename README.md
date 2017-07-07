@@ -25,7 +25,16 @@ Then check `test_results/coverage/index.html` for the HTML report.
 
 ### Running CLI
 
+```
+python market.py coins > market-"$(date +"%b-%d-%y[%H:%M:%S]")".log
+```
+
+Generates file with something like this: market-Jul-07-17[16:29:44].log
+
+## Running flask to expose an HTTP end point with a json response
 
 ```
-python market.py coins
+python app.py
+
+curl http://localhost:8000/market > market-"$(date +"%b-%d-%y[%H:%M:%S]")".json
 ```

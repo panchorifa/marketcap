@@ -14,7 +14,8 @@ class Coin(object):
         self.change = props[6]
 
     def __str__(self):
-        return '{} {} {} {} {} {}'.format(
+        return '{} {} {} {} {} {} {}'.format(
+                self.rank.rjust(5),
                 self.name.rjust(20),
                 self.price.rjust(10),
                 self.cap.rjust(18),
@@ -31,13 +32,16 @@ class Market(object):
         now = datetime.datetime.now()
         date = now.strftime('%b %d, %Y %H:%M:%S')
         print date
-        print '{} {} {} {} {} {}'.format(
+        print '='*100
+        print '{} {} {} {} {} {} {}'.format(
+                'rank'.rjust(5),
                 'name'.rjust(20),
                 'price'.rjust(10),
                 'market cap'.rjust(18),
                 'volume'.rjust(15),
                 'change'.rjust(8),
                 'supply'.rjust(18))
+        print '='*100
         for coin in self.coins:
             print coin
             print '-'*100
