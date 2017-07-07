@@ -8,4 +8,4 @@ class MarketService(object):
 
     def currentMarket(self):
         page = self.api.get(MARKET_URL)
-        return MarketScraper(page).scrape()
+        return MarketScraper(page.text).scrape()

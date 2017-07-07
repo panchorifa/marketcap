@@ -1,6 +1,10 @@
 """
 RequestMock
 """
+class ResponseMock(object):
+    def __init__(self, text):
+        self.text = text
+
 class RequestMock(object):
     def __init__(self, urls):
         """
@@ -11,4 +15,5 @@ class RequestMock(object):
 
 
     def get(self, url):
-        return open(self.urls[url], 'r').read()
+        text = open(self.urls[url], 'r').read()
+        return ResponseMock(text)

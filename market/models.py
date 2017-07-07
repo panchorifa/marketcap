@@ -1,8 +1,7 @@
 """
 market cap models
 """
-
-# headings = ['rank', 'name', 'cap', 'price', 'supply', 'volume', 'change']
+import datetime
 
 class Coin(object):
     def __init__(self, props):
@@ -27,3 +26,19 @@ class Coin(object):
 class Market(object):
     def __init__(self, coins):
         self.coins = coins
+
+    def __str__(self):
+        now = datetime.datetime.now()
+        date = now.strftime('%b %d, %Y %H:%M:%S')
+        print date
+        print '{} {} {} {} {} {}'.format(
+                'name'.rjust(20),
+                'price'.rjust(10),
+                'market cap'.rjust(18),
+                'volume'.rjust(15),
+                'change'.rjust(8),
+                'supply'.rjust(18))
+        for coin in self.coins:
+            print coin
+            print '-'*100
+        return date

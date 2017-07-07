@@ -21,3 +21,11 @@ nosetests -c .noserc_local
 ```
 
 Then check `test_results/coverage/index.html` for the HTML report.
+
+
+### Running CLI
+
+
+```
+python market.py coins
+```
