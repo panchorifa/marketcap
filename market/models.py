@@ -13,6 +13,16 @@ class Coin(object):
         self.volume = props[5]
         self.change = props[6]
 
+    def json(self):
+        return {
+             'rank': self.rank,
+             'name': self.name,
+              'cap': self.cap,
+            'price': self.price,
+           'supply': self.supply,
+           'volume': self.volume,
+           'change': self.change }
+
     def __str__(self):
         return '{} {} {} {} {} {} {}'.format(
                 self.rank.rjust(5),
@@ -27,6 +37,9 @@ class Coin(object):
 class Market(object):
     def __init__(self, coins):
         self.coins = coins
+
+    def json(self):
+        return [c.json() for c in self.coins]
 
     def __str__(self):
         now = datetime.datetime.now()

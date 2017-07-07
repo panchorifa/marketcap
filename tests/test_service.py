@@ -13,3 +13,7 @@ service = MarketService(RequestMock(URLS))
 def test_find_all():
     market = service.currentMarket()
     assert(len(market.coins) == 100)
+
+def test_find_top_10():
+    market = service.currentMarket(10)
+    assert(len(market.coins) == 10)
