@@ -4,7 +4,6 @@ Market API
 import traceback
 import json
 from flask import Flask, jsonify, request
-# from auth import auth
 from service import MarketService
 from settings import MARKET_URL
 
@@ -13,16 +12,17 @@ app = Flask(__name__, static_url_path='')
 
 
 @app.route('/market', methods=['GET'])
-# @auth.login_required
 def get_coins():
     """
-    List of craigslist categories
+    Returns coins from settings.market_url
 
     :statuscode 200: no error
     :statuscode 403: invalid creds
     """
     try:
-        market = MarketService().currentMarket()
+        limit = request.args.get('limit', None)
+        limit = int(limit) if limit else None
+        market = MarketService().currentMarket(limit)
         return jsonify({'market': market.json()})
     except Exception, e:
         traceback.print_exc()

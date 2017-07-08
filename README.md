@@ -37,4 +37,5 @@ Generates file with something like this: market-Jul-07-17[16:29:44].log
 python app.py
 
 curl http://localhost:8000/market > market-"$(date +"%b-%d-%y[%H:%M:%S]")".json
+curl http://localhost:8000/market?limit=5 > market-"$(date +"%b-%d-%y[%H:%M:%S]")".json
 ```
