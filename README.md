@@ -1,8 +1,11 @@
-coinmarketcap.com scraper
-=========================
-retrieves the top 100 coins
+Scraper for coinmarketcap.com
+=============================
+Retrieves the top 100 coins via:
+1. cli (text)
+2. http end point(json)
 
-## setup
+
+### Setup
 
 	pip install -r requirements.txt;pip install -r requirements_dev.txt;
 
@@ -29,13 +32,24 @@ Then check `test_results/coverage/index.html` for the HTML report.
 python market.py coins > market-"$(date +"%b-%d-%y[%H:%M:%S]")".log
 ```
 
-Generates file with something like this: market-Jul-07-17[16:29:44].log
+Generates text file. ie: market-Jul-07-17[16:29:44].log
 
-## Running flask to expose an HTTP end point with a json response
+
+### Running Flask
 
 ```
 python app.py
 
 curl http://localhost:8000/market > market-"$(date +"%b-%d-%y[%H:%M:%S]")".json
 curl http://localhost:8000/market?limit=5 > market-"$(date +"%b-%d-%y[%H:%M:%S]")".json
+```
+
+Generates json file. ie: market-Jul-07-17[16:29:44].json
+
+
+### Serverless Deployment
+
+```
+zappa init
+zappa deploy
 ```

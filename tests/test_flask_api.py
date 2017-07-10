@@ -12,7 +12,8 @@ class ApiTestCase(unittest.TestCase):
         res = self.client().get('/market')
         self.assertEqual(res.status_code, 200)
         market = json.loads(res.data)
-        self.assertEqual(len(market['market']), 100)
+
+        self.assertTrue(len(market['market']) > 100)
         self.assertEqual(market['market'][0]['name'], 'Bitcoin')
 
     def test_get_top_coins(self):

@@ -12,3 +12,6 @@ httpretty==0.7.1
 #linting
 pylint==0.26.0
 flake8==1.7.0
+
+#deployment
+zappa==0.42.2
