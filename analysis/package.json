@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest --projects *.config.js",
-    "test:watch": "jest --projects *.config.js --watchAll"
+    "test:watch": "jest --projects *.config.js --watchAll",
+    "test:coverage": "jest --projects *.config.js --coverage"
   },
   "keywords": [],
   "author": "",

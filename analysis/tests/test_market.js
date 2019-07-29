@@ -9,4 +9,21 @@ describe('coins cli', () => {
     expect(coins[0].rank).toBe('1');
     expect(coins[0].symbol).toBe('BTC');
   });
+
+  test('find latest market from invalid dir', () => {
+    const market = () => {
+      latestMarket(__dirname + '/invalid');
+    };
+    expect(market).toThrow();
+  });
+
+  // TODO define default dir in settings and
+  // check here if that dir does exist
+  test('find latest market from default dir', () => {
+    const market = () => {
+      latestMarket();
+    };
+    expect(market).toThrow();
+  });
+
 });
