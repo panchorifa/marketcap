@@ -5,7 +5,7 @@ Coin market analysis
 
 ```
 npm ci
-npm link
+npm link (TODO)
 ```
 
 ### Running tests & linting
@@ -15,7 +15,12 @@ npm run test
 npm run test:watch
 ```
 
-### Display coin(s)
+### Running test coverage
+```
+npm run test:coverage
+```
+
+### TODO Display coin(s)
 
 ```
 coins

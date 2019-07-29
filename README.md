@@ -35,6 +35,12 @@ ptw
 pylint
 ```
 
+### Coverage
+
+```
+pytest-cov --cov=market
+```
+
 
 ### Running CLI
 
@@ -62,4 +68,11 @@ Generates json file. ie: market-Jul-07-17[16:29:44].json
 ```
 zappa init
 zappa deploy
+```
+
+### TODO
+
+```
+tox.ini
+.travis.yml
 ```
