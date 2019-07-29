@@ -30,6 +30,12 @@ def test_market_top_3():
     assert coins[2].symbol == 'XRP'
 
 @responses.activate
+def test_market_with_invalid_limit():
+    responses.add(responses.GET, MARKET_URL, body=MARKET_RESPONSE, status=200)
+    market = service.market(-1)
+    assert market.coins == []
+
+@responses.activate
 def test_coin():
     COIN = 'bitcoin'
     responses.add(responses.GET, COIN_URL.format(coin=COIN), body=COIN_RESPONSE, status=200)

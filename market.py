@@ -5,6 +5,7 @@ import json
 import requests
 import argparse
 from market.service import MarketService
+from market.settings import DEFAULT_COINS_LIMIT
 
 def create_main_parser():
     parser = argparse.ArgumentParser(
@@ -53,7 +54,9 @@ def main():
 
     if args.command == 'coins':
         try:
-            limit = 100 if args.limit is None else args.limit
+            limit = DEFAULT_COINS_LIMIT if args.limit is None else args.limit
+            if limit <= 0:
+                raise argparse.ArgumentTypeError("Minimum limit is 1")
             market = MarketService().market(limit)
             if args.format == 'json':
                 print jsonify(market)

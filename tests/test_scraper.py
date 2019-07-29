@@ -6,7 +6,7 @@ from market.scraper import MarketScraper
 MARKET_TEXT = open('tests/samples/allsample.html').read()
 COIN_TEXT = open('tests/samples/btc.html').read()
 
-def test_scrape_market():
+def test_scrape_market_with_default_limit():
     market = MarketScraper(MARKET_TEXT).scrape_market()
     assert(len(market.coins) == 11)
     btc = market.coins[0]
@@ -33,9 +33,13 @@ def test_scrape_market():
     assert coins[9].symbol == 'XLM'
     assert coins[10].symbol == 'BCD'
 
-def test_scrape_market_top_5():
-    market = MarketScraper(MARKET_TEXT).scrape_market(5)
-    assert len(market.coins) == 5
+def test_scrape_market_with_invalid_limit():
+    market = MarketScraper(MARKET_TEXT).scrape_market(-1)
+    assert market.coins == []
+
+def test_scrape_market_with_limit():
+    market = MarketScraper(MARKET_TEXT).scrape_market(2)
+    assert len(market.coins) == 2
 
 def test_scrape_coin():
     coin = MarketScraper(COIN_TEXT).scrape_coin()

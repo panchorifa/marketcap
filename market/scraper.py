@@ -22,12 +22,17 @@ class MarketScraper(object):
     def _table(self, attrs):
         return self.soup.find('table', attrs=attrs)
 
+    def _limit_reached(self, limit, coins_length):
+        return limit is not None and limit != 0 and (limit < 0 or coins_length >= limit)
+
     def scrape_market(self, limit=None):
         """
         scrapes all coins from coinmarketcap.com
         """
         coins = []
         for row in self._table({'id': MARKET_TABLE_ID}).find_all('tr')[1:]:
+            if self._limit_reached(limit, len(coins)):
+                break
             tds = row.find_all('td')
             props = [td.get_text().strip() for td in tds]
             icon = tds[1].find('img')
@@ -44,8 +49,6 @@ class MarketScraper(object):
                 'percent24h': props[8],
                 'percent7d': props[9]
             }))
-            if limit and len(coins) == limit:
-                break                
         return Market(coins)
 
     def _coin_val(self, rows, row_nbr, col=0, val=2):
