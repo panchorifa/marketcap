@@ -1,5 +1,5 @@
 """
-Command line tool to scrape and parse craigslist cities
+Command line tool to scrape and parse coinmarketcap.com
 """
 import requests
 import argparse
@@ -19,10 +19,10 @@ def create_main_parser():
 
 def create_coins_parser(subparsers):
     parser_market = subparsers.add_parser(
-        'coins', help='List top 100 coins'
+        'coins', help='List top 10 coins'
     )
     parser_market.add_argument(
-        '-l', '--limit', type=int, required=True,
+        '-l', '--limit', type=int, required=False,
         help='Set the limit for top coins'
     )
 
@@ -39,8 +39,7 @@ def main():
 
     if args.command == 'coins':
         try:
-            service = MarketService(requests)
-            print service.currentMarket(args.limit)
+            print MarketService().market(args.limit or 10)
         except KeyboardInterrupt:
             pass
 

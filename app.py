@@ -2,7 +2,7 @@
 import signal
 import sys
 import os
-from market.app import app
+from market.app import create_app
 
 
 def signal_handler(signal, frame):
@@ -12,6 +12,7 @@ def signal_handler(signal, frame):
 
 def main():
     signal.signal(signal.SIGINT, signal_handler)
+    app = create_app()
     app.run(port=8000, debug=os.environ.get('DEBUG', False))
 
 if __name__ == '__main__':

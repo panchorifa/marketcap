@@ -1,28 +1,56 @@
-import unittest
-# import os
+import pytest
 import json
-from market.app import app
+import responses
 
-class ApiTestCase(unittest.TestCase):
+from market.app import create_app
+from market.service import MarketService
+from market.settings import MARKET_URL, COIN_URL, DEFAULT_COINS_LIMIT
+from core import RequestMock
 
-    def setUp(self):
-        self.client = app.test_client
+MARKET_RESPONSE = open('tests/samples/allsample.html', 'r').read()
+COIN_RESPONSE = open('tests/samples/btc.html', 'r').read()
 
-    def test_get_all_coins(self):
-        res = self.client().get('/market')
-        self.assertEqual(res.status_code, 200)
-        market = json.loads(res.data)
+@pytest.fixture
+def app(mocker):
+    return create_app()
 
-        self.assertTrue(len(market['market']) > 100)
-        self.assertEqual(market['market'][0]['name'], 'Bitcoin')
+@responses.activate
+def test_ping(client):
+    responses.add(responses.GET, MARKET_URL, body=MARKET_RESPONSE, status=200)
+    res = client.get('/ping')
+    assert res.status_code == 200
+    assert json.loads(res.data) == {'ping': 'pong'}
 
-    def test_get_top_coins(self):
-        res = self.client().get('/market?limit=3')
-        self.assertEqual(res.status_code, 200)
-        market = json.loads(res.data)
-        self.assertEqual(len(market['market']), 3)
-        self.assertEqual(market['market'][0]['name'], 'Bitcoin')
+@responses.activate
+def test_get_market(client):
+    responses.add(responses.GET, MARKET_URL, body=MARKET_RESPONSE, status=200)
+    res = client.get('/market')
+    assert res.status_code == 200
+    market = json.loads(res.data)
 
-# Make the tests conveniently executable
-if __name__ == "__main__":
-    unittest.main()
+    assert len(market['market']) == DEFAULT_COINS_LIMIT
+    assert market['market'][0]['name'] == 'Bitcoin'
+
+@responses.activate
+def test_get_top_coins(client):
+    responses.add(responses.GET, MARKET_URL, body=MARKET_RESPONSE, status=200)
+    res = client.get('/market?limit=3')
+    assert res.status_code == 200
+    market = json.loads(res.data)
+    assert len(market['market']) == 3
+    assert market['market'][0]['name'] == 'Bitcoin'
+
+@responses.activate
+def test_get_coin(client):
+    responses.add(responses.GET, COIN_URL.format(coin='bitcoin'), body=COIN_RESPONSE, status=200)
+    res = client.get('/coins/bitcoin')
+    assert res.status_code == 200
+    coin = json.loads(res.data)['coin']
+    assert coin['symbol'] == 'BTC'
+    assert coin['name'] == 'Bitcoin'
+
+@responses.activate
+def test_get_invalid_coin(client):
+    responses.add(responses.GET, COIN_URL.format(coin='bitx'), body={}, status=404)
+    res = client.get('/coins/bitx')
+    assert res.status_code == 404

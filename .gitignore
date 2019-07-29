@@ -65,6 +65,8 @@ nosetests.xml
 .idea
 .iml
 
-test_results
+test_results/coverage
+test_results/coverage.xml
+test_results/nosetests.xml
 market-*.log
 market-*.json

@@ -1,8 +1,8 @@
 Scraper for coinmarketcap.com
 =============================
-Retrieves the top 100 coins via:
+Retrieves coins via:
 1. cli (text)
-2. http end point(json)
+2. http end point (json)
 
 
 ### Setup
@@ -17,13 +17,23 @@ Retrieves the top 100 coins via:
 	sudo apt-get install python-lxml
 	"""
 
-### Testing
+### Running tests
 
 ```
-nosetests -c .noserc_local
+pytest
 ```
 
-Then check `test_results/coverage/index.html` for the HTML report.
+### Running tests in watch mode
+
+```
+ptw
+```
+
+### Linting
+
+```
+pylint
+```
 
 
 ### Running CLI
@@ -35,7 +45,7 @@ python market.py coins > market-"$(date +"%b-%d-%y[%H:%M:%S]")".log
 Generates text file. ie: market-Jul-07-17[16:29:44].log
 
 
-### Running Flask
+### Running HTTP end point
 
 ```
 python app.py
