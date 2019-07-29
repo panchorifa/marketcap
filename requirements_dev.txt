@@ -1,6 +1,7 @@
 # Dev and build requirements
 
 #testing
+responses==0.10.6
 pytest==4.6.4
 pytest-flask==0.15.0
 pytest-mock==1.10.4
@@ -8,7 +9,6 @@ pytest-watch==4.2.0
 coverage==3.6
 tox==1.4.3
 httpretty==0.7.1
-responses==0.10.6
 bs4==0.0.1
 
 #linting
