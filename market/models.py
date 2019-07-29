@@ -54,9 +54,9 @@ class Market(object):
     def __str__(self):
         now = datetime.datetime.now()
         date = now.strftime('%b %d, %Y %H:%M:%S')
-        print date
-        print '='*125
-        print '{} {} {} {} {} {} {} {} {}'.format(
+        print(date)
+        print('='*125)
+        print('{} {} {} {} {} {} {} {} {}'.format(
                 'rank'.rjust(11),
                 'name'.rjust(20),
                 'price'.rjust(10),
@@ -65,9 +65,9 @@ class Market(object):
                 'supply'.rjust(18),
                 '1h'.rjust(8),
                 '24h'.rjust(8),
-                '7d'.rjust(8))
-        print '='*125
+                '7d'.rjust(8)))
+        print('='*125)
         for coin in sorted(self.coins, key=lambda x: int(x.rank)):
-            print coin
-            print '-'*125
+            print(coin)
+            print('-'*125)
         return date

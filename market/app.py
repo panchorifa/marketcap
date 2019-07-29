@@ -47,7 +47,7 @@ def create_app():
             values = coin.json()
             values['name'] = name.lower().capitalize()
             return jsonify({'coin': values})
-        except ServiceError, error:
+        except ServiceError as error:
             traceback.print_exc()
             return 'error', error.status_code
 

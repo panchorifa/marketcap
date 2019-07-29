@@ -5,8 +5,6 @@ import responses
 from market.service import MarketService
 from market.settings import MARKET_URL, COIN_URL
 
-from core import RequestMock
-
 service = MarketService()
 
 MARKET_RESPONSE = open('tests/samples/allsample.html', 'r').read()

@@ -8,6 +8,7 @@ pytest-watch==4.2.0
 coverage==3.6
 tox==1.4.3
 httpretty==0.7.1
+responses==0.10.6
 
 #linting
 pylint==0.26.0

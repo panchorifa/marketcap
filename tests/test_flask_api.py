@@ -5,7 +5,6 @@ import responses
 from market.app import create_app
 from market.service import MarketService
 from market.settings import MARKET_URL, COIN_URL, DEFAULT_COINS_LIMIT
-from core import RequestMock
 
 MARKET_RESPONSE = open('tests/samples/allsample.html', 'r').read()
 COIN_RESPONSE = open('tests/samples/btc.html', 'r').read()
@@ -51,6 +50,6 @@ def test_get_coin(client):
 
 @responses.activate
 def test_get_invalid_coin(client):
-    responses.add(responses.GET, COIN_URL.format(coin='bitx'), body={}, status=404)
+    responses.add(responses.GET, COIN_URL.format(coin='bitx'), body='', status=404)
     res = client.get('/coins/bitx')
     assert res.status_code == 404
