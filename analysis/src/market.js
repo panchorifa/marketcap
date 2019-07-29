@@ -2,11 +2,11 @@ const {readdirSync} = require('fs');
 const DEFAULT_DATA_DIR = __dirname + '/../../data/';
 
 const dataDir = (dir) => {
-  const dataDir = dir || DEFAULT_DATA_DIR
-  if(!dataDir.endsWith('/')) {
-    dataDir += '/';
+  let d = dir || DEFAULT_DATA_DIR;
+  if(!d.endsWith('/')) {
+    d += '/';
   }
-  return dataDir;
+  return d;
 };
 
 const dataFilenames = (dir) => {
