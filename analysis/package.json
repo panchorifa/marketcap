@@ -1,0 +1,31 @@
+{
+  "name": "analysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "coins": "./cli.js"
+  },
+  "scripts": {
+    "test": "jest --projects *.config.js",
+    "test:watch": "jest --projects *.config.js --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-jasmine": "^2.10.1",
+    "eslint-plugin-no-only-tests": "^2.3.1",
+    "jest": "^24.8.0",
+    "jest-runner-eslint": "^0.7.4"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clui": "^0.3.6",
+    "command-line-usage": "^6.0.2",
+    "dotenv": "^8.0.0",
+    "inquirer": "^6.5.0",
+    "loglevel": "^1.6.3"
+  }
+}

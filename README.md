@@ -39,7 +39,7 @@ pylint
 ### Running CLI
 
 ```
-python market.py coins > market-"$(date +"%b-%d-%y[%H:%M:%S]")".log
+python market.py coins -l 0 -f json > data/market-"$(date +"%b-%d-%y[%H:%M:%S]")".log
 ```
 
 Generates text file. ie: market-Jul-07-17[16:29:44].log

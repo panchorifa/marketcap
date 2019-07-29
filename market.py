@@ -1,6 +1,7 @@
 """
 Command line tool to scrape and parse coinmarketcap.com
 """
+import json
 import requests
 import argparse
 from market.service import MarketService
@@ -19,17 +20,30 @@ def create_main_parser():
 
 def create_coins_parser(subparsers):
     parser_market = subparsers.add_parser(
-        'coins', help='List top 10 coins'
+        'coins', help='List top 100 coins'
     )
     parser_market.add_argument(
         '-l', '--limit', type=int, required=False,
-        help='Set the limit for top coins'
+        help='Set the limit for top coins; 0 to get all.'
+    )
+    parser_market.add_argument(
+        '-f', '--format', type=str, required=False,
+        help='Request supported formats: json'
     )
 
     return parser_market
 
 def _list(value):
     return [x.strip() for x in value.split(',')]
+
+def jsonify(market):
+    res = '{"market": [\n'
+    for i, coin in enumerate(market.coins):
+        if i > 0:
+            res += ',\n'
+        res += '{}'.format(json.dumps(coin.json()))
+    res += ']}'
+    return res
 
 def main():
     parser, subparsers = create_main_parser()
@@ -39,7 +53,12 @@ def main():
 
     if args.command == 'coins':
         try:
-            print MarketService().market(args.limit or 10)
+            limit = 100 if args.limit is None else args.limit
+            market = MarketService().market(limit)
+            if args.format == 'json':
+                print jsonify(market)
+            else:
+                print market
         except KeyboardInterrupt:
             pass
 
