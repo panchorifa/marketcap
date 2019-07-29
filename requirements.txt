@@ -1,5 +1,4 @@
 requests==2.22.0
 lxml==4.4.0
 beautifulsoup4==4.6.0
-bs4==0.0.1
-Flask==0.15.0
+Flask==1.1.1
