@@ -16,8 +16,8 @@ def test_market_with_default_limit():
     market = service.market()
     assert len(market.coins) == 10
     coins = market.coins
-    assert coins[8].symbol == 'BSV'
-    assert coins[9].symbol == 'XLM'
+    assert coins[8].symbol == 'EOS'
+    assert coins[9].symbol == 'ADA'
 
 @responses.activate
 def test_market_top_3():
@@ -27,7 +27,7 @@ def test_market_top_3():
     assert len(coins) == 3
     assert coins[0].symbol == 'BTC'
     assert coins[1].symbol == 'ETH'
-    assert coins[2].symbol == 'XRP'
+    assert coins[2].symbol == 'USDT'
 
 @responses.activate
 def test_market_with_invalid_limit():
